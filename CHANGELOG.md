@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.4.0 (2026-08-10)
+
+### Features
+
+* **oas**: support OAS 3.1 and 3.2 in getConfiguration (OAS31/OAS32 configurations)
+* **amf**: bump amf-client-js from 5.10.2 to 5.11.7902 (exposes OAS31/OAS32)
+
 ## 0.3.0 (2026-04-07)
 
 ### Features
