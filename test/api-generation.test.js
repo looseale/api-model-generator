@@ -321,6 +321,95 @@ describe('API generation', () => {
     });
   });
 
+  describe('OAS 3.1 data model generation', () => {
+    let files;
+    let opts;
+
+    const modelFile = path.join(dest, 'oas31-webhooks.json');
+    const compactModelFile = path.join(dest, 'oas31-webhooks-compact.json');
+    const config = { 'type': 'OAS 3.1', 'mime': 'application/yaml' };
+
+    beforeEach(() => {
+      files = new Map();
+      opts = {
+        src: srcDir,
+        dest,
+      };
+    });
+
+    afterEach(() => fs.remove(dest));
+
+    it('Generates data model for regular model', async () => {
+      files.set('apis/oas31-webhooks.yaml', config);
+      await generator(files, opts);
+      const exists = await fs.pathExists(modelFile);
+      assert.isTrue(exists, 'model file exists');
+      const data = await fs.readJson(modelFile);
+      assertValidAmfModel(data);
+    });
+
+    it('Generates data model for compact model', async () => {
+      files.set('apis/oas31-webhooks.yaml', config);
+      await generator(files, opts);
+      const exists = await fs.pathExists(compactModelFile);
+      assert.isTrue(exists, 'model file exists');
+      const data = await fs.readJson(compactModelFile);
+      assertValidAmfModel(data);
+    });
+
+    it('Emits webhooks as first-class operations', async () => {
+      files.set('apis/oas31-webhooks.yaml', config);
+      await generator(files, opts);
+      const raw = await fs.readFile(compactModelFile, 'utf8');
+      assert.include(raw, 'Webhook', 'compact model references a Webhook');
+    });
+  });
+
+  describe('OAS 3.2 data model generation', () => {
+    let files;
+    let opts;
+
+    const modelFile = path.join(dest, 'oas32-query-sse.json');
+    const compactModelFile = path.join(dest, 'oas32-query-sse-compact.json');
+    const config = { 'type': 'OAS 3.2', 'mime': 'application/yaml' };
+
+    beforeEach(() => {
+      files = new Map();
+      opts = {
+        src: srcDir,
+        dest,
+      };
+    });
+
+    afterEach(() => fs.remove(dest));
+
+    it('Generates data model for regular model', async () => {
+      files.set('apis/oas32-query-sse.yaml', config);
+      await generator(files, opts);
+      const exists = await fs.pathExists(modelFile);
+      assert.isTrue(exists, 'model file exists');
+      const data = await fs.readJson(modelFile);
+      assertValidAmfModel(data);
+    });
+
+    it('Generates data model for compact model', async () => {
+      files.set('apis/oas32-query-sse.yaml', config);
+      await generator(files, opts);
+      const exists = await fs.pathExists(compactModelFile);
+      assert.isTrue(exists, 'model file exists');
+      const data = await fs.readJson(compactModelFile);
+      assertValidAmfModel(data);
+    });
+
+    it('Parses the QUERY method and SSE media type', async () => {
+      files.set('apis/oas32-query-sse.yaml', config);
+      await generator(files, opts);
+      const raw = await fs.readFile(compactModelFile, 'utf8');
+      assert.include(raw, 'QUERY', 'compact model references the QUERY method');
+      assert.include(raw, 'event-stream', 'compact model references the SSE media type');
+    });
+  });
+
   describe('generator.generate()', () => {
     let opts;
 
