@@ -78,6 +78,8 @@ function getConfiguration(type) {
     case 'OAS 3.1': return OASConfiguration.OAS31();
     case 'OAS 3.2': return OASConfiguration.OAS32();
     case 'ASYNC 2.0': return AsyncAPIConfiguration.Async20();
+    case 'ASYNC 3.0': return AsyncAPIConfiguration.Async30();
+    case 'ASYNC 3.1': return AsyncAPIConfiguration.Async30();
     case 'GRPC': return GRPCConfiguration.GRPC();
     default: throw new Error(`Unknown API type: ${type}`);
   }

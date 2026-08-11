@@ -354,6 +354,8 @@ describe('API generation', () => {
     const cases = [
       { file: 'apis/oas31.yaml', type: 'OAS 3.1', out: 'oas31' },
       { file: 'apis/oas32.yaml', type: 'OAS 3.2', out: 'oas32' },
+      { file: 'apis/asyncApi30.yaml', type: 'ASYNC 3.0', out: 'asyncApi30' },
+      { file: 'apis/asyncApi31.yaml', type: 'ASYNC 3.1', out: 'asyncApi31' },
     ];
 
     cases.forEach(({ file, type, out }) => {
