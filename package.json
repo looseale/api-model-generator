@@ -16,7 +16,7 @@
     "Francisco Di Giandomenico"
   ],
   "dependencies": {
-    "amf-client-js": "^5.10.2",
+    "amf-client-js": "5.11.12531",
     "fs-extra": "^10.0.0"
   },
   "devDependencies": {

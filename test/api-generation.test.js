@@ -346,4 +346,28 @@ describe('API generation', () => {
       assertValidAmfModel(data);
     });
   });
+
+  describe('New spec generation', () => {
+    const dest = path.join('test', 'playground');
+    const srcDir = 'test/';
+
+    const cases = [
+      { file: 'apis/oas31.yaml', type: 'OAS 3.1', out: 'oas31' },
+      { file: 'apis/oas32.yaml', type: 'OAS 3.2', out: 'oas32' },
+    ];
+
+    cases.forEach(({ file, type, out }) => {
+      describe(`${type} model generation`, () => {
+        afterEach(() => fs.remove(dest));
+
+        it(`generates a valid compact model for ${type}`, async () => {
+          const files = new Map();
+          files.set(file, { type, mime: 'application/yaml' });
+          await generator(files, { src: srcDir, dest });
+          const compact = await fs.readJson(path.join(dest, `${out}-compact.json`));
+          assertValidAmfModel(compact);
+        });
+      });
+    });
+  });
 });

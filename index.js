@@ -75,6 +75,8 @@ function getConfiguration(type) {
     case 'OAS 3.0':
     case 'OAS 3':
       return OASConfiguration.OAS30();
+    case 'OAS 3.1': return OASConfiguration.OAS31();
+    case 'OAS 3.2': return OASConfiguration.OAS32();
     case 'ASYNC 2.0': return AsyncAPIConfiguration.Async20();
     case 'GRPC': return GRPCConfiguration.GRPC();
     default: throw new Error(`Unknown API type: ${type}`);
@@ -98,6 +100,7 @@ function getConfiguration(type) {
  * @return {Promise<void>}
  */
 async function processFile(sourceFile, file, type, destPath, resolution, flattened, sourceMaps) {
+  // Convert file path to output JSON path
   let dest = `${file.substr(0, file.lastIndexOf('.')) }.json`;
   if (dest.indexOf('/') !== -1) {
     dest = dest.substr(dest.lastIndexOf('/'));
