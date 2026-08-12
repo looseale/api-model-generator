@@ -1,4 +1,4 @@
-export declare type ApiType = 'RAML 1.0' | 'RAML 0.8' | 'OAS 2.0' | 'OAS 3.0' | 'OAS 3.1' | 'OAS 3.2' | 'ASYNC 2.0' | 'GRPC';
+export declare type ApiType = 'RAML 1.0' | 'RAML 0.8' | 'OAS 2.0' | 'OAS 3.0' | 'OAS 3.1' | 'OAS 3.2' | 'ASYNC 2.0' | 'ASYNC 3.0' | 'ASYNC 3.1' | 'GRPC';
 
 export declare interface ApiConfiguration {
   /**
